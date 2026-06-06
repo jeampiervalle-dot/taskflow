@@ -12,6 +12,8 @@
 
 <body>
 
+    <div class="fondo-pantalla"></div>
+
 <aside class="sidebar">
     <ul class="sidebar_list">
 
