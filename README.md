@@ -1,6 +1,6 @@
 # TaskFlow
 
-Aplicación web de gestión de tareas con sistema de notificaciones inteligente, construida con **Laravel 12 + MongoDB**.
+Aplicación web de gestión de tareas con sistema de notificaciones inteligente, construida con **Laravel 11 + MongoDB**.
 
 ---
 
