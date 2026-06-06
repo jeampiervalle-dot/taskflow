@@ -16,15 +16,21 @@
 
 <div class="contenedor-login">
 
+   @php
+    $showRegister = request()->boolean('register') 
+        || $errors->has('name') 
+        || $errors->has('email') 
+        || $errors->has('password');
+@endphp
     <!-- LOGIN -->
-    <div class="login active-panel" id="loginPanel">
+    <div class="login {{ $showRegister ? 'hidden-left' : 'active-panel' }}" id="loginPanel">
 
         <img src="{{ asset('img/icono pantalla.png') }}" alt="Login Art" class="imagen_login">
 
         <div class="formulario-derecho">
 
             <h2>iniciar sesion</h2>
-            @if ($errors->any())
+            @if ($errors->any() && !$errors->has('name') && !$errors->has('password') && !$errors->has('email'))
     <div class="error-login">
         Correo o contraseña incorrectos
     </div>
@@ -37,6 +43,7 @@
                     type="email"
                     name="email"
                     placeholder="correo"
+                    value="{{ old('email') }}"
                     required
                 >
 
@@ -62,13 +69,43 @@
     </div>
 
     <!-- REGISTER -->
-    <div class="login hidden-right" id="registerPanel">
+    <div class="login {{ $showRegister ? 'active-panel' : 'hidden-right' }}" id="registerPanel">
 
         <img src="{{ asset('img/fondo 3.png') }}" alt="Register Art" class="imagen_login">
 
         <div class="formulario-derecho">
 
             <h2>crear cuenta</h2>
+
+            @if ($errors->any() && ($errors->has('name') || $errors->has('email') || $errors->has('password')))
+    <div class="error-login">
+
+        @if ($errors->has('name'))
+            <div>El nombre es obligatorio</div>
+        @endif
+
+        @if ($errors->has('email'))
+            @if ($errors->first('email') == 'The email has already been taken.')
+                <div>El correo ya está registrado</div>
+            @elseif ($errors->first('email') == 'The email field is required.')
+                <div>El correo es obligatorio</div>
+            @else
+                <div>El correo no es válido</div>
+            @endif
+        @endif
+
+        @if ($errors->has('password'))
+            @if ($errors->first('password') == 'The password field is required.')
+                <div>La contraseña es obligatoria</div>
+            @elseif ($errors->first('password') == 'The password confirmation does not match.')
+                <div>Las contraseñas no coinciden</div>
+            @else
+                <div>Error en la contraseña</div>
+            @endif
+        @endif
+
+    </div>
+@endif
 
             <form method="POST" action="{{ route('register') }}">
                 @csrf
@@ -77,6 +114,7 @@
                     type="text"
                     name="name"
                     placeholder="usuario"
+                    value="{{ old('name') }}"
                     required
                 >
 
@@ -84,6 +122,7 @@
                     type="email"
                     name="email"
                     placeholder="correo"
+                    value="{{ old('email') }}"
                     required
                 >
 

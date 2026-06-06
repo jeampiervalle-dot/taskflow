@@ -2,9 +2,9 @@ window.onload = function () {
 
     document.getElementById("miPopup").style.display = "flex";
 
-    const btnLogin = document.getElementById("btn-logindash");
+    const loginForm = document.querySelector('#loginPanel form');
 
-    btnLogin.addEventListener("click", () => {
+    loginForm?.addEventListener("submit", () => {
 
         const userInput = document.querySelector('#loginPanel input[name="email"]');
         const username = userInput?.value.trim() || 'Jean';
@@ -12,10 +12,6 @@ window.onload = function () {
         localStorage.setItem('project_final_user', username);
 
         document.body.classList.add("salir");
-
-        // NO usar preventDefault()
-        // NO usar window.location.href
-        // Laravel se encargará de redirigir al dashboard
 
     });
 
