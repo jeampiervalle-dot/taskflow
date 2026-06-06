@@ -1,0 +1,4 @@
+/*
+  Content-Security-Policy: default-src 'self' https: data: 'unsafe-inline'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; font-src 'self' data: https:;
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
