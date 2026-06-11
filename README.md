@@ -1,6 +1,6 @@
 # TaskFlow
 
-Aplicación web de gestión de tareas con sistema de notificaciones inteligente, construida con **Laravel 12 + MongoDB**.
+Aplicación web de gestión de tareas con sistema de notificaciones inteligente, construida con **Laravel 11 + MongoDB**.
 
 ---
 
@@ -39,7 +39,7 @@ Una vez clonado el repo, dentro de la carpeta del proyecto:
 
 ```powershell
 # 1. Clonar
-git clone https://github.com/TU_USUARIO/taskflow.git
+git clone https://github.com/jeampiervalle-dot/taskflow
 cd taskflow
 
 # 2. Ejecutar el instalador (valida requisitos, instala todo, genera APP_KEY)
