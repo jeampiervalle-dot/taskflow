@@ -10,7 +10,7 @@
 </head>
 <body>
 
-    <div class="fondo-pantalla"></div>
+   
 
     <aside class="sidebar">
         <ul class="sidebar_list">
@@ -187,6 +187,5 @@
             if (t) t.classList.add('hidden');
         }, 4000);
     </script>
-
 </body>
 </html>

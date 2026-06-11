@@ -13,22 +13,23 @@ body {
     display: flex;
     gap: 25px;
     min-height: 100vh;
-    background: url('../img/fondo\ nuevo.gif') no-repeat center center fixed;
-    background-size: cover;
+   background: linear-gradient(135deg, #e7f3b1 0%, #95cadf 50%, #f093fb 100%);
     background-attachment: fixed;
+    background-size: cover;
     overflow-x: hidden;
     color: #fff;
 }
 
-/* ---------- FONDO ANIMADO (se difumina al pasar por el panel) ---------- */
+/* ---------- FONDO GRADIENTE ---------- */
 .fondo-pantalla {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: url('../img/fondo\ nuevo.gif') no-repeat center center fixed;
+     background: linear-gradient(135deg, #e7f3b1 0%, #95cadf 50%, #f093fb 100%);
     background-size: cover;
+    background-attachment: fixed;
     z-index: -1;
     transition: filter 0.5s ease, transform 0.5s ease;
 }
@@ -40,7 +41,7 @@ body:has(.notificaciones:hover) .fondo-pantalla {
 
 /* ---------- SIDEBAR (mismo estilo que el dashboard) ---------- */
 .sidebar {
-    background-color: rgba(42, 44, 54, 0.466);
+    background: rgba(53, 54, 59, 0.164);
     width: 90px;
     height: calc(100vh - 40px);
     padding: 2rem 0.5rem;
@@ -49,7 +50,7 @@ body:has(.notificaciones:hover) .fondo-pantalla {
     flex-direction: column;
     overflow: hidden;
     transition: width 0.4s ease;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    
     backdrop-filter: blur(10px);
     flex-shrink: 0;
 }
@@ -188,7 +189,7 @@ body:has(.notificaciones:hover) .fondo-pantalla {
     grid-template-columns: 280px 1fr;
     gap: 30px;
     align-items: stretch;
-    background-color: rgba(19, 17, 17, 0.55);
+    background: rgba(53, 54, 59, 0.164);
     padding: 25px;
     border-radius: 30px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
@@ -210,25 +211,20 @@ body:has(.notificaciones:hover) .fondo-pantalla {
     flex-direction: column;
     gap: 18px;
     min-height: 0;
+    
 }
 
 .noti-icon {
-    width: 100%;
-    height: 100%;
+    width: 300px;
+    height: 120px;
     max-height: 360px;
     object-fit: cover;
     border-radius: 22px;
     flex-shrink: 0;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    
 }
 
-.noti-left .back-btn {
-    position: static;
-    width: 100%;
-    justify-content: center;
-    padding: 12px 18px;
-    font-size: 15px;
-}
+
 
 /* ---------- COLUMNA DERECHA: CONTENIDO ---------- */
 .noti-contenido {

@@ -1,3 +1,42 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+  
+  body {
+    background: transparent;
+  }
+}
+
+@layer utilities {
+  .bg-gradient-main {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    background-attachment: fixed;
+  }
+  
+  .bg-gradient-soft {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    background-attachment: fixed;
+  }
+  
+  .bg-gradient-dark {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #1e3c72 100%);
+    background-attachment: fixed;
+  }
+  
+  .bg-gradient-warm {
+    background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+    background-attachment: fixed;
+  }
+  
+  .bg-gradient-cool {
+    background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+    background-attachment: fixed;
+  }
+}

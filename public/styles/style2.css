@@ -7,7 +7,7 @@
 }
 
 body{
-    background: url('../img/fondo\ nuevo.gif') no-repeat center center fixed;
+    background: linear-gradient(135deg, #e7f3b1 0%, #95cadf 50%, #f093fb 100%);
     background-attachment: fixed;
     min-height:100vh;
     overflow-x:hidden;
@@ -18,15 +18,16 @@ body{
     background-size: cover;
 }
 
-/* ---------- FONDO ANIMADO (se difumina al pasar por el panel) ---------- */
+/* ---------- FONDO GRADIENTE ---------- */
 .fondo-pantalla {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: url('../img/fondo\ nuevo.gif') no-repeat center center fixed;
+    background: linear-gradient(135deg, #e7f3b1 0%, #95cadf 50%, #f093fb 100%);
     background-size: cover;
+    background-attachment: fixed;
     z-index: -1;
     transition: filter 0.5s ease, transform 0.5s ease;
 }
@@ -38,7 +39,7 @@ body:has(.dashboard_main:hover) .fondo-pantalla {
 
 /* SIDEBAR ESTILIZADO */
 .sidebar{
-    background-color: rgba(66, 68, 73, 0.349);
+   background: rgba(53, 54, 59, 0.164);
     width: 90px;
     height: calc(100vh - 40px);
     padding: 2rem 0.5rem;
