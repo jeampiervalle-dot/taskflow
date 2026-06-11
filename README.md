@@ -31,9 +31,30 @@ Antes de instalar, asegúrate de tener:
 
 ---
 
-## 🚀 Instalación rápida (Windows)
+## 🚀 Instalación rápida
 
-### Opción 1 — Script automático (recomendado)
+### Linux (CachyOS, Ubuntu, CentOS, Fedora, Debian, Arch, openSUSE)
+
+```bash
+# 1. Clonar
+git clone https://github.com/jeampiervalle-dot/taskflow
+cd taskflow
+
+# 2. Dar permisos y ejecutar instalador automático
+chmod +x setup.sh
+./setup.sh
+
+# 3. Arrancar
+php artisan serve
+```
+
+Abre http://localhost:8000
+
+> ⚠️ **Importante:** Asegúrate de que MongoDB esté corriendo: `sudo systemctl status mongod` (o `mongodb` según distro). Si no inicia: `sudo systemctl start mongod`
+
+### Windows
+
+#### Opción 1 — Script automático (recomendado)
 
 Una vez clonado el repo, dentro de la carpeta del proyecto:
 
@@ -131,7 +152,8 @@ taskflow/
 │       ├── style_noti.css                # Notificaciones
 │       └── style_profile.css             # Perfil
 ├── routes/web.php                        # Rutas de la app
-├── setup.ps1                             # Script de instalación
+├── setup.ps1                             # Script de instalación (Windows)
+├── setup.sh                              # Script de instalación (Linux)
 └── .env.example                          # Plantilla de variables de entorno
 ```
 
@@ -140,7 +162,7 @@ taskflow/
 
 ## 🛠️ Comandos útiles
 
-```powershell
+```bash
 # Limpiar todos los caches
 php artisan optimize:clear
 
@@ -152,6 +174,9 @@ php artisan tinker
 
 # Compilar assets para producción
 npm run build
+
+# Desarrollo con hot-reload
+npm run dev
 ```
 
 ---
