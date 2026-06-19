@@ -1,0 +1,184 @@
+RESUMEN EJECUTIVO
+PROYECTO TASKFLOW
+
+DESCRIPCIÓN GENERAL
+TaskFlow es una aplicación web de gestión de tareas personales diseñada
+para ayudar a los usuarios a organizar sus actividades y mejorar el
+cumplimiento de plazos mediante un sistema de notificaciones inteligentes.
+La plataforma permite crear, administrar y monitorear tareas desde una
+interfaz moderna, intuitiva y adaptable a dispositivos móviles y de
+escritorio.
+
+OBJETIVO
+Brindar una herramienta eficiente para la planificación y seguimiento
+de actividades personales, reduciendo el riesgo de olvidar tareas
+importantes mediante alertas automáticas y seguimiento continuo del
+estado de cada actividad.
+
+TECNOLOGÍAS UTILIZADAS
+• Backend:          Laravel 12 (PHP 8.2+)
+• Base de Datos:    MongoDB
+• Frontend:         Blade, Alpine.js, Tailwind CSS
+• Herramientas:     Node.js, Vite, npm
+• Autenticación:    Laravel Breeze
+
+FLUJO DE TRABAJO FRONTEND
+
+| Vista | Carga de estilos |
+|---|---|
+| login | @vite → app.css + style.css |
+| dashboard | @vite → app.css + style2.css |
+| notificaciones | @vite → app.css + style_noti.css |
+| perfil | @vite → app.css + style2.css + style_profile.css |
+| register, forgot-password, etc. | @vite → app.css (Tailwind) |
+
+TODAS las vistas del proyecto usan @vite para cargar sus estilos y
+scripts. Los archivos CSS están en resources/css/ y se editan
+directamente. Después de editar, se ejecuta npm run build para
+compilar o npm run dev para desarrollo con cambios en tiempo real.
+
+No hay más archivos sueltos en public/ — todo pasa por el pipeline
+de Vite igual que en un proyecto profesional con MEAN.
+
+FUNCIONALIDADES PRINCIPALES
+• Gestión completa de tareas (crear, consultar, editar y eliminar)
+• Control de estados de tareas (pendiente y completada)
+• Sistema de notificaciones automáticas para tareas próximas a vencer
+  o vencidas
+• Notificaciones inmediatas ante acciones realizadas por el usuario
+• Panel centralizado de notificaciones con filtros y acciones masivas
+• Dashboard con estadísticas y resumen de actividades
+• Administración de perfil y seguridad de cuenta
+• Verificación de correo electrónico y autenticación segura
+
+ARQUITECTURA Y DISEÑO
+El sistema está desarrollado bajo el patrón MVC de Laravel, utilizando
+MongoDB como base de datos NoSQL. Su arquitectura favorece la
+escalabilidad, el mantenimiento del código y la facilidad de evolución
+futura del proyecto.
+
+SEGURIDAD
+TaskFlow incorpora mecanismos de seguridad estándar de Laravel:
+• Contraseñas cifradas mediante bcrypt
+• Protección CSRF
+• Validación de datos de entrada
+• Middleware de autenticación y control de acceso
+
+ESTADO ACTUAL DEL PROYECTO
+El sistema se encuentra completamente funcional para su propósito
+principal y ha sido validado mediante pruebas manuales. Además, cuenta
+con documentación técnica detallada y procesos automatizados para
+facilitar su despliegue y mantenimiento.
+
+OPORTUNIDADES DE MEJORA
+Como parte de la evolución del proyecto, se recomienda:
+1. Implementar pruebas automatizadas
+2. Incorporar procesamiento asíncrono mediante colas
+3. Desarrollar una API REST para futuras integraciones
+4. Agregar gestión avanzada de roles y permisos
+5. Implementar monitoreo, registros y procesos CI/CD
+6. La integración de subida de archivos para mejorar la creación
+   de tareas
+
+CONCLUSIÓN
+TaskFlow constituye una solución sólida y funcional para la gestión de
+tareas personales, combinando una experiencia de usuario moderna con
+una arquitectura tecnológica robusta. Su implementación basada en
+Laravel y MongoDB proporciona una base escalable y mantenible,
+preparada para futuras mejoras orientadas a entornos de producción de
+mayor exigencia.
+
+ÁMBITO
+
+1.1 Objetivos del sistema
+El objetivo principal de TaskFlow es permitir a los usuarios organizar,
+administrar y dar seguimiento a sus tareas personales de manera
+eficiente. El sistema facilita el registro de tareas con fecha y hora,
+el control de vencimientos, y el envío automático de notificaciones
+para recordar actividades pendientes o vencidas.
+
+Mejorar la organización y productividad de los usuarios mediante una
+herramienta digital accesible, fácil de utilizar y disponible desde
+cualquier dispositivo con navegador web.
+
+1.2 Hardware, software e interfaces humanas
+
+Hardware:
+• Servidor: 2 GB RAM, 1 vCPU, 10 GB disco (compartido o VPS básico)
+• Cliente: cualquier dispositivo con navegador web moderno
+
+Software:
+• Backend: PHP 8.2+, Laravel 12, MongoDB 6+
+• Frontend: Blade, Tailwind CSS, Alpine.js
+• Herramientas: Node.js 18+, Composer, Vite, npm
+• Servidor web: Nginx o Apache
+• Base de datos: MongoDB (NoSQL)
+
+Interfaces humanas:
+• Navegadores: Chrome, Firefox, Safari, Edge (versiones actuales)
+• Diseño responsive adaptado a móvil, tablet y escritorio
+• Interfaz en español con navegación lateral tipo sidebar
+• Modal para crear/editar tareas sin recargar la página
+• Panel de notificaciones con filtros y acciones masivas
+• Toast/sistema de alertas visuales para feedback inmediato
+
+1.3 Alcance del proyecto
+
+Alcance: TaskFlow es una aplicación web para uso individual que
+permite a las personas gestionar sus tareas personales, organizar
+sus actividades diarias y recibir recordatorios automáticos para
+no olvidar lo que tienen que hacer. Está pensada para el usuario
+común que quiere ordenar su día a día.
+
+Incluye:
+• Registro, inicio de sesión y recuperación de contraseña
+• Verificación de correo electrónico
+• Creación, edición y eliminación de tareas (título, descripción,
+  fecha y hora)
+• Marcado de tareas como completadas
+• Detección automática de tareas próximas a vencer (72 h) y vencidas
+• Notificaciones automáticas de estado (pendiente, vencida)
+• Notificaciones por acciones del usuario (creada, actualizada,
+  completada, eliminada)
+• Panel de notificaciones con filtros: todas, no leídas, leídas
+• Acciones masivas: marcar todas como leídas, limpiar todo
+• Dashboard con resumen: total de tareas, próximas, última editada
+• Toast de bienvenida con alerta de tareas pendientes/vencidas
+• Gestión de perfil: editar nombre, email, cambiar contraseña
+• Eliminación de cuenta
+• Zona horaria personalizable por usuario
+• Diseño responsive con sidebar y modal interactivo
+
+Excluye:
+• Trabajo colaborativo o tareas compartidas
+• Roles y permisos de usuario
+• API REST pública
+• Subida de archivos o adjuntos
+• Integraciones externas (Google Calendar, Slack, etc.)
+• Modo offline o PWA
+• Multi-idioma
+• Panel de administración global
+• Facturación o suscripciones
+• Pruebas automatizadas (implementación futura)
+• Procesamiento asíncrono con colas (implementación futura)
+
+1.4 Objetivos específicos
+1. Implementar autenticación segura con Laravel Breeze, incluyendo
+   registro, inicio de sesión, recuperación de contraseña y
+   verificación de correo electrónico
+2. Desarrollar el CRUD completo de tareas con los campos: título,
+   descripción, fecha, hora y estado (pendiente/completada/vencida)
+3. Implementar detección automática de tareas próximas a vencer
+   (menos de 72 horas) y vencidas, con actualización de estado
+4. Crear sistema de notificaciones automáticas dual: por estado
+   (pendiente/vencida) y por acciones del usuario (crear, editar,
+   completar, eliminar)
+5. Construir panel de notificaciones con filtros (todas, no leídas,
+   leídas), marcado individual/masivo y eliminación
+6. Desarrollar dashboard con resumen visual de tareas, próxima tarea
+   y alertas mediante toast
+7. Implementar gestión de perfil de usuario: edición de datos,
+   cambio de contraseña, eliminación de cuenta y zona horaria
+8. Garantizar interfaz responsive y accesible desde cualquier
+   dispositivo con navegador moderno
+

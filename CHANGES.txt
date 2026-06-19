@@ -1,0 +1,48 @@
+CHANGES - Migración a Vite + Tailwind (Frontend Unificado) + Limpieza
+====================================================================
+Fecha: Junio 2026
+
+1. ARCHIVOS MOVIDOS
+   - public/styles/style.css       → resources/css/style.css
+   - public/styles/style2.css      → resources/css/style2.css
+   - public/styles/style_noti.css  → resources/css/style_noti.css
+   - public/styles/style_profile.css → resources/css/style_profile.css
+   - public/js/script.js           → resources/js/script.js
+
+2. ARCHIVOS ELIMINADOS
+   - public/styles/        (directorio completo)
+   - public/js/script.js   (archivo suelto)
+
+3. ARCHIVOS ELIMINADOS (CÓDIGO MUERTO)
+   - app/View/Components/AppLayout.php    (nadie usaba x-app-layout)
+   - resources/views/layouts/app.blade.php (nadie lo extendía)
+   - resources/views/layouts/navigation.blade.php (solo lo usaba app.blade.php)
+   - resources/views/welcome.blade.php     (ruta / redirige al dashboard)
+   - public/_headers                      (archivo Cloudflare irrelevante)
+
+3. ARCHIVOS ACTUALIZADOS
+   - vite.config.js  → se agregaron todos los CSS y JS como entradas
+   - auth/login.blade.php    → ahora usa @vite en lugar de <link> y <script> directos
+   - dashboard.blade.php     → ahora usa @vite en lugar de <link>
+   - notificaciones.blade.php → ahora usa @vite en lugar de <link>
+   - profile/edit.blade.php  → ahora usa @vite en lugar de <link>
+
+4. NUEVO FLUJO DE TRABAJO
+   - Desarrollo:  npm run dev    (cambios en tiempo real, hot reload)
+   - Producción:  npm run build  (comprime y optimiza)
+
+5. CÓMO EDITAR ESTILOS AHORA
+   - Editas los archivos en resources/css/ (ej: resources/css/style2.css)
+   - Ejecutas npm run build para compilar
+   - O usas npm run dev para ver cambios automáticos
+
+6. VISTAS QUE USAN CADA CSS
+   - login:          app.css + style.css
+   - dashboard:      app.css + style2.css
+   - notificaciones: app.css + style_noti.css
+   - perfil:         app.css + style2.css + style_profile.css
+   - auth Breeze:    app.css (Tailwind)
+
+7. DEPENDENCIAS
+   - node_modules/  → necesario para npm run dev / npm run build (77 MB)
+   - public/build/  → archivos compilados, se regeneran con npm run build

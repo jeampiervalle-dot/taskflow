@@ -1,0 +1,61 @@
+# ==========================================================
+#  TASKFLOW · .gitignore
+# ==========================================================
+
+# ---------- LOGS Y BASES DE DATOS LOCALES ----------
+*.log
+*.sqlite
+*.sqlite-journal
+*.sql
+/database/database.sqlite
+/storage/logs/*.log
+/storage/framework/cache/data/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/framework/testing/*
+
+# ---------- ENTORNO (NUNCA subir credenciales) ----------
+.env
+.env.backup
+.env.production
+.env.local
+auth.json
+/.env.*.local
+
+# ---------- DEPENDENCIAS ----------
+/vendor
+/api/node_modules
+/api/.env
+/api/package-lock.json.bak
+
+# ---------- BUILD / CACHE ----------
+/public/build
+/public/hot
+/public/storage
+/bootstrap/cache/*.php
+.phpunit.result.cache
+.phpunit.cache
+
+# ---------- IDE / EDITORES ----------
+/.idea
+/.vscode
+/.fleet
+/.nova
+/.zed
+
+# ---------- SISTEMA OPERATIVO ----------
+.DS_Store
+Thumbs.db
+$RECYCLE.BIN/
+desktop.ini
+ehthumbs.db
+ehthumbs_vista.db
+*.tmp
+
+# ---------- OTROS ----------
+Homestead.json
+Homestead.yaml
+auth.json
+.phpactor.json
+/storage/pail
+/storage/*.key
