@@ -29,6 +29,11 @@
             </div>
         </li>
 
+        <li class="element_sidebar" onclick="window.location='{{ route('home') }}'">
+            <i class="fa-solid fa-house"></i>
+            <div class="sidebar_hide"><p>Resumen</p></div>
+        </li>
+
         <li class="element_sidebar" onclick="window.location='{{ route('notificaciones.index') }}'">
             <i class="fa-solid fa-bell"></i>
             <div class="sidebar_hide"><p>Notificaciones</p></div>
@@ -116,7 +121,7 @@
                             @if($task->status === 'completed')
                                 <span class="task_badge completed">Terminada</span>
                             @elseif($task->status === 'vencida' || (\Carbon\Carbon::parse($task->date . ' ' . $task->time, auth()->user()->timezone ?? config('app.timezone'))->isPast() && $task->status !== 'completed'))
-                                <span class="task_badge expired" style="background-color: #e63946; color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: bold;">Vencida</span>
+                                <span class="task_badge expired">Vencida</span>
                             @else
                                 <span class="task_badge pending">Pendiente</span>
                             @endif
@@ -232,7 +237,7 @@
             <form action="{{ route('notificaciones.read', $autoNotif->id) }}" method="POST" style="display:inline;">
                 @csrf
                 @method('PATCH')
-                <button type="submit" class="toast_close_btn" style="background: rgba(76, 175, 80, 0.5);">
+                <button type="submit" class="toast_close_btn" style="background: rgba(34, 197, 94, 0.15); color: #059669;">
                     <i class="fa-regular fa-circle-check"></i> Marcar leída
                 </button>
             </form>

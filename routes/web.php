@@ -23,6 +23,44 @@ Route::middleware('auth')->group(function () {
     // Dashboard
     Route::get('/dashboard', [TaskController::class, 'index'])->name('dashboard');
 
+    // Home resumen
+    Route::get('/home', function () {
+        $userId = auth()->id();
+        $tasks = App\Models\Task::where('user_id', $userId)->get();
+        $total = $tasks->count();
+        $completed = $tasks->where('status', 'completed')->count();
+        $pending = $tasks->where('status', 'pending')->count();
+        $expired = $tasks->where('status', 'vencida')->count();
+        $percent = $total > 0 ? round(($completed / $total) * 100) : 0;
+
+        $nextTask = App\Models\Task::where('user_id', $userId)
+            ->where('status', 'pending')
+            ->orderBy('date', 'asc')
+            ->orderBy('time', 'asc')
+            ->first();
+
+        $unreadCount = App\Models\Notification::where('user_id', $userId)
+            ->where('read', false)->count();
+
+        $now = now();
+        $calMonth = $now->month;
+        $calYear = $now->year;
+        $calMonthName = ucfirst($now->translatedFormat('F'));
+
+        $allTasksJson = $tasks->map(fn($t) => [
+            'title' => $t->title,
+            'date'  => $t->date,
+            'time'  => $t->time,
+            'status' => $t->status,
+        ])->values();
+
+        return view('home', compact(
+            'tasks', 'total', 'completed', 'pending', 'expired', 'percent',
+            'nextTask', 'unreadCount',
+            'calMonth', 'calYear', 'calMonthName', 'allTasksJson'
+        ));
+    })->name('home');
+
     // Tareas
     Route::match(['put', 'patch'], '/tasks/{task}', [TaskController::class, 'update'])->name('tasks.update');
     Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');

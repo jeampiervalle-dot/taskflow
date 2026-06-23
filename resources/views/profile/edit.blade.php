@@ -25,12 +25,17 @@
                 </div>
             </li>
 
-            <li class="element_sidebar" onclick="window.location='{{ route('dashboard') }}'" style="cursor: pointer;">
+            <li class="element_sidebar" onclick="window.location='{{ route('home') }}'">
+                <i class="fa-solid fa-house"></i>
+                <div class="sidebar_hide"><p>Resumen</p></div>
+            </li>
+
+            <li class="element_sidebar" onclick="window.location='{{ route('dashboard') }}'">
                 <i class="fa-solid fa-list-check"></i>
                 <div class="sidebar_hide"><p>Tareas</p></div>
             </li>
 
-            <li class="element_sidebar" onclick="window.location='{{ route('notificaciones.index') }}'" style="cursor: pointer;">
+            <li class="element_sidebar" onclick="window.location='{{ route('notificaciones.index') }}'">
                 <i class="fa-solid fa-bell"></i>
                 <div class="sidebar_hide"><p>Notificaciones</p></div>
             </li>

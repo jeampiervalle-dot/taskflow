@@ -7,6 +7,9 @@
     <title>TaskFlow - Login</title>
 
     @vite(['resources/css/style.css', 'resources/js/app.js', 'resources/js/script.js'])
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -155,17 +158,17 @@
 
 </div>
 
-<a href="https://github.com/jeampiervalle-dot" target="_blank">
-
-    <img
-        id="icon_gib"
-        src="{{ asset('img/icongib.gif') }}"
-        alt="Github"
-        class="fondo_login"
-        loading="lazy"
-    >
-
-</a>
+<footer class="login_footer">
+    <div class="footer_icons">
+        <a href="https://github.com/jeampiervalle-dot" target="_blank">
+            <img src="{{ asset('img/icongib.gif') }}" alt="Github" loading="lazy">
+        </a>
+        <img src="{{ asset('img/giphy.gif') }}" alt="TaskFlow" loading="lazy">
+    </div>
+    <div class="footer_copy">
+        &copy; {{ date('Y') }} TaskFlow · Built by Jean Pierre Valle
+    </div>
+</footer>
 
 <div id="miPopup" class="overlay-popup" onclick="this.style.display='none'">
 
@@ -178,14 +181,6 @@
     </div>
 
 </div>
-
-<img
-    id="icon_gib2"
-    src="{{ asset('img/giphy.gif') }}"
-    alt="Gif"
-    class="fondo_login"
-    loading="lazy"
->
 
 <script>
     document.addEventListener('keydown', function handler(e) {
