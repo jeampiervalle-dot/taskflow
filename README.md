@@ -1,131 +1,109 @@
+![TaskFlow](public/img/logo.png)
+
 # TaskFlow
 
-Aplicación web de gestión de tareas con sistema de notificaciones inteligente, construida con **Laravel 12 + MongoDB**.
+**Sistema de Gestión de Tareas Personales con Notificaciones Inteligentes**
+
+TaskFlow es una aplicación web moderna para la gestión de tareas personales, construida con **Laravel 12** y **MongoDB**. Cuenta con un sistema de notificaciones automáticas que te mantiene al tanto del estado de tus tareas: pendientes, próximas a vencer y vencidas.
 
 ---
 
-## ✨ Características
+## 🚀 Características
 
-- ✅ CRUD completo de tareas con título, descripción, fecha límite y prioridad
-- 🔔 **Sistema de notificaciones automático** basado en el estado de cada tarea (`pendiente`, `próxima a vencer`, `vencida`)
-- 👤 Perfil de usuario con avatar, edición de datos, cambio de contraseña y eliminación de cuenta
-- 🎨 UI con sidebar de navegación, glassmorphism y diseño responsive
-- 🔐 Autenticación completa con Laravel Breeze
-- 🗄️ **MongoDB** como base de datos (no requiere migraciones SQL)
-
----
-
-## 📋 Requisitos previos
-
-Antes de instalar, asegúrate de tener:
-
-| Software       | Versión     | Descarga                                                                 |
-|----------------|-------------|--------------------------------------------------------------------------|
-| **PHP**        | 8.2 o superior | https://windows.php.net/download/                                    |
-| **Composer**   | 2.x         | https://getcomposer.org/Composer-Setup.exe                              |
-| **Node.js**    | 18 o superior | https://nodejs.org/                                                   |
-| **MongoDB**    | 6 o superior | https://www.mongodb.com/try/download/community                        |
-| **Extensión PHP `mongodb`** | — | https://pecl.php.net/package/mongodb                          |
-
-> 💡 El proyecto trae un `setup.ps1` que valida todo esto automáticamente.
+- ✅ **CRUD completo de tareas** — título, descripción, fecha límite, hora y prioridad
+- 🔔 **Notificaciones inteligentes** — alertas automáticas por estado (pendiente, próxima a vencer, vencida) y por acciones (crear, editar, completar, eliminar)
+- 👤 **Perfil de usuario** — avatar, edición de datos, cambio de contraseña y eliminación de cuenta
+- 🎨 **UI moderna** — sidebar colapsable, modales, toasts, diseño responsive y glassmorphism
+- 🔐 **Autenticación segura** — registro, inicio de sesión, verificación de correo y recuperación de contraseña con Laravel Breeze
+- 🗄️ **MongoDB** — base de datos NoSQL schemaless, sin necesidad de migraciones
+- 📱 **Responsive** — adaptado a móvil, tablet y escritorio
+- 🐱 **Easter egg** — Bongo Cat interactivo al escribir en el dashboard
 
 ---
 
-## 🚀 Instalación rápida
+## 📋 Requisitos del sistema
 
-### Linux (CachyOS, Ubuntu, CentOS, Fedora, Debian, Arch, openSUSE)
+| Software | Versión | Instalación |
+|----------|---------|-------------|
+| **PHP** | 8.2+ | `sudo apt install php8.3 php8.3-{cli,mongodb,xml,mbstring,curl,zip,gd,bcmath}` |
+| **Composer** | 2.x | `php composer-setup.php --install-dir=/usr/local/bin --filename=composer` |
+| **Node.js** | 20+ | `curl -fsSL https://deb.nodesource.com/setup_22.x \| bash -` |
+| **npm** | 10+ | Incluido con Node.js |
+| **MongoDB** | 7.0+ | `sudo apt install mongodb-org` |
+| **Extensión PHP mongodb** | — | Incluida en `php8.3-mongodb` |
+
+---
+
+## 🛠️ Instalación
+
+### Ubuntu / Debian (recomendado)
 
 ```bash
-# 1. Clonar
-git clone https://github.com/jeampiervalle-dot/taskflow
+# 1. Clonar el repositorio
+git clone https://github.com/jeampiervalle-dot/taskflow.git
 cd taskflow
 
-# 2. Dar permisos y ejecutar instalador automático
+# 2. Ejecutar el instalador automático
 chmod +x setup.sh
-./setup.sh
+sudo ./setup.sh
 
-# 3. Arrancar
-php artisan serve
+# 3. ¡Listo! El servidor se iniciará en http://localhost:8000
 ```
 
-Abre http://localhost:8000
+El instalador (`setup.sh`) realiza todo automáticamente:
+- Instala PHP 8.3 con todas las extensiones necesarias
+- Instala Composer, Node.js 22 y npm
+- Instala y configura MongoDB Community Server 7.0
+- Ejecuta `composer install` y `npm install && npm run build`
+- Genera el archivo `.env` y la `APP_KEY`
+- Crea el enlace simbólico de storage
+- Ajusta permisos
 
-> ⚠️ **Importante:** Asegúrate de que MongoDB esté corriendo: `sudo systemctl status mongod` (o `mongodb` según distro). Si no inicia: `sudo systemctl start mongod`
+### Instalación manual
 
-### Windows
-
-#### Opción 1 — Script automático (recomendado)
-
-Una vez clonado el repo, dentro de la carpeta del proyecto:
-
-```powershell
-# 1. Clonar
-git clone https://github.com/jeampiervalle-dot/taskflow
+```bash
+git clone https://github.com/jeampiervalle-dot/taskflow.git
 cd taskflow
 
-# 2. Ejecutar el instalador (valida requisitos, instala todo, genera APP_KEY)
-powershell -ExecutionPolicy Bypass -File .\setup.ps1
-
-# 3. Arrancar
-php artisan serve
-```
-
-Abre http://localhost:8000
-
-### Opción 2 — Manual
-
-```powershell
-# 1. Clonar
-git clone https://github.com/TU_USUARIO/taskflow.git
-cd taskflow
-
-# 2. Instalar dependencias PHP
 composer install
-
-# 3. Instalar dependencias JS
-npm install
-
-# 4. Crear archivo de entorno
-copy .env.example .env
-
-# 5. Generar clave de aplicación
+npm install && npm run build
+cp .env.example .env
 php artisan key:generate
-
-# 6. Crear enlace simbólico de storage
 php artisan storage:link
-
-# 7. (Opcional) Compilar assets
-npm run dev
-
-# 8. Arrancar servidor
 php artisan serve
 ```
-
-> ⚠️ **Importante:** Asegúrate de que el servicio de MongoDB esté corriendo antes de abrir la app. Si lo instalaste como servicio de Windows, ya inicia automáticamente. Si no: `mongod --dbpath C:\data\db`
 
 ---
 
-## ⚙️ Configuración de MongoDB
+## ⚙️ Variables de entorno
 
-Edita `.env` si tu MongoDB está en otra ubicación:
+Edita el archivo `.env` para configurar la aplicación:
 
-```env
-DB_CONNECTION=mongodb
-MONGODB_URI=mongodb://127.0.0.1:27017
-MONGODB_DATABASE=taskflow
-```
+| Variable | Descripción | Valor por defecto |
+|----------|-------------|-------------------|
+| `APP_NAME` | Nombre de la aplicación | `TaskFlow` |
+| `APP_ENV` | Entorno (`local`, `production`) | `local` |
+| `APP_DEBUG` | Modo depuración | `true` |
+| `APP_URL` | URL base de la aplicación | `http://localhost:8000` |
+| `DB_CONNECTION` | Conexión a base de datos | `mongodb` |
+| `MONGODB_URI` | URI de conexión a MongoDB | `mongodb://127.0.0.1:27017` |
+| `MONGODB_DATABASE` | Nombre de la base de datos | `taskflow` |
+| `SESSION_DRIVER` | Controlador de sesión | `file` |
+| `CACHE_STORE` | Almacenamiento de caché | `file` |
+| `QUEUE_CONNECTION` | Conexión de colas | `sync` |
+| `MAIL_MAILER` | Controlador de correo | `log` |
 
-La base de datos `taskflow` se crea automáticamente la primera vez que Laravel se conecta; no necesitas crear tablas manualmente.
+> **Nota:** La base de datos `taskflow` se crea automáticamente la primera vez que Laravel se conecta a MongoDB. No necesitas crear tablas manualmente.
 
 ---
 
 ## 🧪 Datos de prueba
 
-El proyecto no incluye un seeder por defecto. Una vez que te registres, puedes:
+El proyecto no incluye un seeder por defecto. Una vez registrado:
 
-1. Crear tareas desde la UI con distintas fechas (hoy, mañana, hace 2 días)
-2. Visitar el dashboard para ver el toast con la notificación automática
-3. Ir a **Notificaciones** en el sidebar para ver el listado completo, filtrar y gestionar
+1. Crea tareas desde el dashboard con distintas fechas (hoy, mañana, hace 2 días)
+2. Visita el dashboard para ver el toast con la notificación automática
+3. Ve a **Notificaciones** en el sidebar para ver el listado completo, filtrar y gestionar
 
 ---
 
@@ -134,39 +112,51 @@ El proyecto no incluye un seeder por defecto. Una vez que te registres, puedes:
 ```
 taskflow/
 ├── app/
-│   ├── Http/Controllers/
-│   │   ├── NotificationController.php    # CRUD de notificaciones
-│   │   ├── TaskController.php            # Tareas + sync de notificaciones
-│   │   └── ...
+│   ├── Console/Commands/
+│   │   └── SetupMongoIndexes.php      # Índices de MongoDB
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── Auth/                  # Autenticación (Breeze)
+│   │   │   ├── TaskController.php     # CRUD de tareas + notificaciones
+│   │   │   ├── NotificationController.php
+│   │   │   └── ProfileController.php
+│   │   └── Requests/
 │   └── Models/
-│       ├── Notification.php              # task_id, type, read, user_id
-│       └── Task.php                      # notification_dismissed_at, last_state_notified
+│       ├── User.php
+│       ├── Task.php
+│       └── Notification.php
+├── config/                            # Configuración de Laravel
+├── database/                          # Factories y seeders
 ├── resources/
-│   └── views/
-│       ├── dashboard.blade.php           # Dashboard con sidebar + toast
-│       ├── notificaciones.blade.php      # Página de notificaciones
-│       └── profile/                      # Edición de perfil
+│   ├── css/                           # Estilos (Tailwind + CSS personalizado)
+│   ├── js/                            # Scripts frontend
+│   └── views/                         # Plantillas Blade
+│       ├── dashboard.blade.php
+│       ├── home.blade.php
+│       ├── notificaciones.blade.php
+│       ├── auth/                      # Vistas de autenticación
+│       └── profile/                   # Perfil de usuario
+├── routes/
+│   ├── web.php                        # Rutas de la aplicación
+│   └── auth.php                       # Rutas de autenticación
 ├── public/
-│   └── styles/
-│       ├── style2.css                    # Dashboard
-│       ├── style_noti.css                # Notificaciones
-│       └── style_profile.css             # Perfil
-├── routes/web.php                        # Rutas de la app
-├── setup.ps1                             # Script de instalación (Windows)
-├── setup.sh                              # Script de instalación (Linux)
-└── .env.example                          # Plantilla de variables de entorno
+│   ├── img/                           # Imágenes, logos, gifs
+│   └── build/                         # Assets compilados (Vite)
+├── setup.sh                           # Instalador automático
+├── ER.md                              # Diagrama entidad-relación
+├── CHANGES.txt                        # Registro de cambios
+└── composer.json
 ```
 
 ---
 
-
-## 🛠️ Comandos útiles
+## 🧰 Comandos útiles
 
 ```bash
-# Limpiar todos los caches
+# Limpiar todas las cachés
 php artisan optimize:clear
 
-# Ver rutas
+# Listar rutas
 php artisan route:list
 
 # Consola interactiva de Laravel
@@ -175,12 +165,32 @@ php artisan tinker
 # Compilar assets para producción
 npm run build
 
-# Desarrollo con hot-reload
+# Desarrollo con recarga en caliente
 npm run dev
+
+# Iniciar servidor de desarrollo
+php artisan serve
 ```
 
 ---
 
-## 📜 Licencia
+## 🤝 Contribuir
 
-MIT
+1. Haz un fork del proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/nueva-funcionalidad`)
+3. Haz commit de tus cambios (`git commit -m 'Agrega nueva funcionalidad'`)
+4. Haz push a la rama (`git push origin feature/nueva-funcionalidad`)
+5. Abre un Pull Request
+
+---
+
+## 📄 Licencia
+
+Este proyecto está bajo la licencia **MIT**. Consulta el archivo `LICENSE` para más detalles.
+
+---
+
+<div align="center">
+  <sub>Construido con ❤️ por Jean Pier Valle, Andree Coyla y Vanessa Coyla</sub><br>
+  <sub>Curso: Base de Datos Avanzado — 2026</sub>
+</div>

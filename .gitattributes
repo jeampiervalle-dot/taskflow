@@ -1,11 +1,33 @@
+# Normalizar a LF en todos los archivos
 * text=auto eol=lf
 
+# Archivos binarios (no convertir)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.avif binary
+*.svg binary
+*.woff binary
+*.woff2 binary
+*.eot binary
+*.ttf binary
+*.otf binary
+*.zip binary
+*.gz binary
+*.tar binary
+*.pdf binary
+
+# Diffs especializados
 *.blade.php diff=html
 *.css diff=css
 *.html diff=html
 *.md diff=markdown
 *.php diff=php
 
+# Export-ignore para archives de distribución
 /.github export-ignore
 CHANGELOG.md export-ignore
 .styleci.yml export-ignore
