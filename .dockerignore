@@ -3,7 +3,6 @@
 .gitignore
 node_modules/
 vendor/
-storage/
 public/build/
 .idea/
 *.md
