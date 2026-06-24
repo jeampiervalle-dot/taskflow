@@ -17,62 +17,7 @@
 
     <div class="fondo-pantalla"></div>
 
-<aside class="sidebar">
-    <ul class="sidebar_list">
-
-        <li class="element_sidebar element-logo">
-            <div class="logo_container">
-                <i class="fa-solid fa-book-open"></i>
-                <div class="sidebar_hide">
-                    <img class="logo_text" src="{{ asset('img/logo.png') }}" alt="TaskFlow">
-                </div>
-            </div>
-        </li>
-
-        <li class="element_sidebar" onclick="window.location='{{ route('home') }}'">
-            <i class="fa-solid fa-house"></i>
-            <div class="sidebar_hide"><p>Resumen</p></div>
-        </li>
-
-        <li class="element_sidebar" onclick="window.location='{{ route('notificaciones.index') }}'">
-            <i class="fa-solid fa-bell"></i>
-            <div class="sidebar_hide"><p>Notificaciones</p></div>
-            @if(isset($unreadCount) && $unreadCount > 0)
-                <span class="sidebar-badge">{{ $unreadCount }}</span>
-            @endif
-        </li>
-
-        <li class="element_sidebar active">
-            <i class="fa-solid fa-list-check"></i>
-            <div class="sidebar_hide"><p>Tareas</p></div>
-        </li>
-
-        <!-- + button only visible on mobile in bottom nav -->
-        <li class="element_sidebar mobile-add-btn" onclick="openCreate()">
-            <i class="fa-solid fa-plus"></i>
-            <div class="sidebar_hide"><p>Crear tarea</p></div>
-        </li>
-
-        <li class="element_sidebar"
-            onclick="event.preventDefault(); localStorage.removeItem('taskToastVisto_{{ Auth::id() }}'); document.getElementById('logout-form').submit();">
-            <i class="fa-solid fa-right-from-bracket"></i>
-            <div class="sidebar_hide"><p>Salir</p></div>
-            
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
-        </li>
-
-        <li class="element_sidebar profile_item">
-            <a href="{{ route('profile.edit') }}" class="logout-btn">
-                <img src="{{ asset('img/giphy.gif') }}" class="profile_img" loading="lazy">
-                <div class="sidebar_hide">
-                    <p>{{ Auth::user()->name }}</p>
-                </div>
-            </a>
-        </li>
-    </ul>
-</aside>
+<x-sidebar active="tareas" :unread-count="$unreadCount ?? 0" />
 
 <main class="dashboard_main">
 
@@ -142,13 +87,12 @@
                             </form>
 
                             <button class="primary-btn btn-edit"
-                                    onclick="editTask(
-                                        '{{ $task->id }}',
-                                        '{{ $task->title }}',
-                                        `{{ $task->description }}`,
-                                        '{{ $task->date }}',
-                                        '{{ $task->time }}'
-                                    )">
+                                    data-id="{{ $task->id }}"
+                                    data-title="{{ $task->title }}"
+                                    data-description="{{ $task->description }}"
+                                    data-date="{{ $task->date }}"
+                                    data-time="{{ $task->time }}"
+                                    onclick="editTask(this)">
                                 Editar
                             </button>
                         @endif
@@ -163,6 +107,10 @@
             @empty
                 <p class="no-tasks">No hay tareas aún</p>
             @endforelse
+
+            <div class="pagination-wrap">
+                {{ $tasks->links() }}
+            </div>
 
         </div>
 
@@ -275,13 +223,13 @@ function openCreate() {
     document.getElementById('taskModal').classList.remove('hidden');
 }
 
-function editTask(id, title, description, date, time) {
-    document.getElementById('taskTitle').value = title;
-    document.getElementById('taskDescription').value = description;
-    document.getElementById('taskDate').value = date;
-    document.getElementById('taskTime').value = time;
+function editTask(btn) {
+    document.getElementById('taskTitle').value = btn.dataset.title;
+    document.getElementById('taskDescription').value = btn.dataset.description;
+    document.getElementById('taskDate').value = btn.dataset.date;
+    document.getElementById('taskTime').value = btn.dataset.time;
     const form = document.getElementById('taskForm');
-    form.action = `/tasks/${id}`;
+    form.action = `/tasks/${btn.dataset.id}`;
     document.getElementById('methodField').value = "PUT";
     document.getElementById('modalTitle').innerText = "Editar tarea";
     document.getElementById('taskModal').classList.remove('hidden');

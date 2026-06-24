@@ -16,54 +16,7 @@
 
 <div class="fondo-pantalla"></div>
 
-<aside class="sidebar">
-    <ul class="sidebar_list">
-        <li class="element_sidebar element-logo">
-            <div class="logo_container">
-                <i class="fa-solid fa-book-open"></i>
-                <div class="sidebar_hide">
-                    <img class="logo_text" src="{{ asset('img/logo.png') }}" alt="TaskFlow">
-                </div>
-            </div>
-        </li>
-
-        <li class="element_sidebar active">
-            <i class="fa-solid fa-house"></i>
-            <div class="sidebar_hide"><p>Resumen</p></div>
-        </li>
-
-        <li class="element_sidebar" onclick="window.location='{{ route('dashboard') }}'">
-            <i class="fa-solid fa-list-check"></i>
-            <div class="sidebar_hide"><p>Tareas</p></div>
-        </li>
-
-        <li class="element_sidebar" onclick="window.location='{{ route('notificaciones.index') }}'">
-            <i class="fa-solid fa-bell"></i>
-            <div class="sidebar_hide"><p>Notificaciones</p></div>
-            @if($unreadCount > 0)
-                <span class="sidebar-badge">{{ $unreadCount }}</span>
-            @endif
-        </li>
-
-        <li class="element_sidebar"
-            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-            <i class="fa-solid fa-right-from-bracket"></i>
-            <div class="sidebar_hide"><p>Salir</p></div>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
-        </li>
-
-        <li class="element_sidebar profile_item">
-            <a href="{{ route('profile.edit') }}" class="logout-btn">
-                <img src="{{ asset('img/giphy.gif') }}" class="profile_img" loading="lazy">
-                <div class="sidebar_hide">
-                    <p>{{ Auth::user()->name }}</p>
-                </div>
-            </a>
-        </li>
-    </ul>
-</aside>
+<x-sidebar active="home" :unread-count="$unreadCount" />
 
 <main class="dashboard_main home_main">
 

@@ -21,7 +21,7 @@ class NotificationController extends Controller
             $query->where('read', true);
         }
 
-        $notifications = $query->orderBy('created_at', 'desc')->get();
+        $notifications = $query->orderBy('created_at', 'desc')->paginate(30)->appends(request()->query());
 
         $unreadCount = Notification::where('user_id', $userId)
             ->where('read', false)
@@ -75,10 +75,15 @@ class NotificationController extends Controller
     {
         $userId = auth()->id();
 
-        $notifications = Notification::where('user_id', $userId)->get();
+        $expiredIds = Notification::where('user_id', $userId)
+            ->whereIn('type', ['pendiente', 'vencida'])
+            ->whereNotNull('task_id')
+            ->pluck('task_id');
 
-        foreach ($notifications as $notification) {
-            $this->markRelatedTaskAsDismissed($notification);
+        if ($expiredIds->isNotEmpty()) {
+            Task::whereIn('id', $expiredIds)
+                ->where('user_id', $userId)
+                ->update(['notification_dismissed_at' => now()]);
         }
 
         Notification::where('user_id', $userId)->delete();
@@ -88,22 +93,9 @@ class NotificationController extends Controller
 
     private function findNotification($id)
     {
-        $id = (string) $id;
-        if ($id === '') {
-            abort(404);
-        }
-
-        $userId = auth()->id();
-
-        $notification = Notification::where('_id', $id)
-            ->where('user_id', $userId)
+        $notification = Notification::where('id', $id)
+            ->where('user_id', auth()->id())
             ->first();
-
-        if (!$notification) {
-            $notification = Notification::where('id', $id)
-                ->where('user_id', $userId)
-                ->first();
-        }
 
         if (!$notification) {
             abort(404, 'Notificación no encontrada');

@@ -15,11 +15,9 @@ class TaskController extends Controller
     {
         $userId = auth()->id();
 
-        $this->cleanupLegacyDuplicates($userId);
-
         $tasks = Task::where('user_id', $userId)
             ->orderBy('updated_at', 'desc')
-            ->get();
+            ->paginate(20);
 
         $nextTask = Task::where('user_id', $userId)
             ->where('status', 'pending')
@@ -284,32 +282,4 @@ class TaskController extends Controller
         ]);
     }
 
-    
-    private function cleanupLegacyDuplicates($userId)
-    {
-        $legacy = Notification::where('user_id', $userId)
-            ->whereNull('task_id')
-            ->get();
-
-        $grouped = [];
-        foreach ($legacy as $notif) {
-            $key = $notif->title;
-            $grouped[$key][] = $notif;
-        }
-
-        foreach ($grouped as $title => $items) {
-            if (count($items) <= 1) {
-                continue;
-            }
-            usort($items, function ($a, $b) {
-                $aTime = $a->created_at ? $a->created_at->getTimestamp() : 0;
-                $bTime = $b->created_at ? $b->created_at->getTimestamp() : 0;
-                return $bTime <=> $aTime;
-            });
-            $keep = array_shift($items);
-            foreach ($items as $dup) {
-                $dup->delete();
-            }
-        }
-    }
 }
